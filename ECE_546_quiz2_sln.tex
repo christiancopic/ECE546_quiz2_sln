@@ -1,0 +1,154 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[all]{xy}
+\usepackage{gensymb}
+
+
+\usepackage{amsmath,amsthm,amssymb,color,latexsym}
+\usepackage{geometry}        
+\geometry{letterpaper}    
+\usepackage{graphicx}
+
+\newtheorem{problem}{Problem}
+
+\newenvironment{solution}[1][\it{Solution}]{\textbf{#1. } }
+
+
+\begin{document}
+\noindent ECE/MSE 446/546\hfill Quiz 2 \\
+SOLUTIONS \hfill Source Code: \texttt{\detokenize{https://github.com/christiancopic/ECE546_quiz2_sln}}
+
+\hrulefill
+
+\begin{problem}
+Derive the pulling rate in the Czochralski crystal growth process.
+\end{problem}
+\begin{solution}
+	Heat balance equation:
+    \begin{align}
+         L*\frac{dm}{dt} + k_L*\frac{T}{x_1} * A_1 = k_s*\frac{T}{x_2}*A_2
+    \end{align}
+    
+    L = Latent heat of fusion\par
+    $\frac{dm}{dt}$ = Rate of amount of Si freezing per unit time\par
+    $k_L$ = thermal conductivity of melt\par
+    $A_1$ = cross sectinal area of isotherm at $x_1$\par
+    $\frac{dT}{dx_1}$ = temperature gradient at isotherm $x_1$\par
+    $k_s$ = thermal conductivity of solid\par
+    $A_2$ = cross sectional area of isotherm at $x_2$\par
+    $\frac{dT}{dx_2}$ = temprature gradient at isotherm $x_2$\\
+
+    The rate by which the crystal is pulled out of the melt is
+
+    \begin{align}
+        \frac{dm}{dt} = v_p * A * N
+    \end{align}
+
+    N = density of Si\par
+    $v_p$ = Pull rate of crystal\\
+
+   Put (2) into (1), with the assumption that $A_1 = A_2 = A$
+
+   $$\implies L*v_p*A*N + k_L * \frac{dT}{dx_1}*A = k_s*\frac{dT}{dx_2}*A$$
+   $$\implies L*v_p*A*N = k_s*\frac{dT}{dx_2}*A$$
+   \begin{align}
+        \implies v_{pMAX} = \frac{k_s}{LN} * \frac{dT}{dx_2}    
+   \end{align}
+   
+    Heat loss due to radiation is given by Stefan-Boltzmann Law
+
+    \begin{align}
+        dQ = (2*\pi*r*dx)*(\sigma*\epsilon*T^4)
+   \end{align}
+
+   $2*\pi*r*dx$ = Radiating surface area\par
+   $\sigma$ = Stefan-Boltzmann constant\par
+   $\epsilon$ = Emissivity of Si\\
+
+   The heat conducted up the crystal is given by
+
+   \begin{align}
+        Q = k_s*(\pi*r^2) * \frac{dT}{dx}
+   \end{align}
+
+   Differentiate (5) with respect to x
+
+   $$\implies \frac{dQ}{dx} = k_s*(\pi*r^2)* \frac{d^2T}{dx^2}+\pi*r^2*\frac{dT}{dx}*\frac{dk_s}{dx} \cong k_s(\pi*r^2)*\frac{d^2T}{dx^2}$$
+
+   \begin{align}
+        \implies \frac{d^2T}{dx^2} - \frac{2*\sigma*\epsilon}{k_s*r}*T^4=0
+   \end{align}
+
+   Thermal conductivity of Si below 1000 $\degree$C is given by
+
+   $$k_s = k_m* \frac{T_m}{T}$$
+
+   where $k_m$ is the thermal conductivity of Si at melting point $T_m$
+
+   \begin{align}
+        \implies \frac{d^2T}{dx^2} - \frac{2*\sigma*\epsilon}{k_m*r*T_m}*T^5 = 0
+   \end{align}
+
+   Solve the differential equation (7) for T. Then differentiate T with respect with x and evaluate it at x=0 to get:
+
+   $$V_{pMAX} = \frac{1}{L*N} * \sqrt{\frac{2*\sigma*\epsilon*k_m*T^5_m}{3*r}}$$
+
+    
+\end{solution} 
+
+\begin{problem}
+Derive the expression for the segregation coefficient in the Czochralski crystal growth process.
+\end{problem}
+\begin{solution}
+	Equilibrium segregation coefficient
+
+    $$k_o = \frac{C_S}{C_L}$$
+
+    $C_S$ = Equilibrium concentration of the dopant in the solid\par
+    $C_L$ = Equilibrium concentration of the dopant in the liquid near interface\\
+
+    Doping concentration of liquid is
+
+    $$C_L = \frac{S}{M_o - M}$$
+
+    S = Amount of dopant remaining in the melt\par
+    $M_o$ = Initial weight of grown crystal \par
+    M = Crystal weight\\
+
+    For incremental amount of weight dM of crystal, the corresponding reduction in dopant from the melt is 
+    $$-dS = C_S*dM$$
+
+    Combining our equations we yield
+    $$\frac{dS}{S} = -k_o * \frac{dM}{M_o - M}$$
+
+    Integrate and simplify to get
+
+    $$C_S = C_o * k_o * (1-\frac{M}{M_o})^{k_o - 1}$$
+    
+\end{solution}
+
+
+
+\begin{problem}
+List the steps involved in the fabrication of a silicon wafer for logic device applications.
+\end{problem}
+\begin{solution}
+	\begin{enumerate}
+	    \item Wafer production
+        \item Wafer slicing
+        \item Surface polishing
+        \item Oxidation
+        \item Photolithography
+        \item Etching
+        \item Doping
+        \item Thin film deposition
+        \item Annealing
+        \item Metallization
+        \item Chemical Mechanical polishing
+        \item Testing
+        \item Dicing
+        \item Packaging
+	\end{enumerate}
+\end{solution}
+ 
+\end{document}
